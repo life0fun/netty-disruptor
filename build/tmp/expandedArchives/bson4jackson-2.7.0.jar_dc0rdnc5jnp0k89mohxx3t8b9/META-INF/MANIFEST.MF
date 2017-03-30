@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Export-Package: de.undercouch.bson4jackson;version="2.7.0";uses:="com.
+ fasterxml.jackson.core,com.fasterxml.jackson.core.base,com.fasterxml.
+ jackson.core.io,com.fasterxml.jackson.databind,de.undercouch.bson4jac
+ kson.io,de.undercouch.bson4jackson.types",de.undercouch.bson4jackson.
+ deserializers;version="2.7.0";uses:="com.fasterxml.jackson.core,com.f
+ asterxml.jackson.databind,com.fasterxml.jackson.databind.module,de.un
+ dercouch.bson4jackson",de.undercouch.bson4jackson.io;version="2.7.0",
+ de.undercouch.bson4jackson.serializers;version="2.7.0";uses:="com.fas
+ terxml.jackson.core,com.fasterxml.jackson.databind,com.fasterxml.jack
+ son.databind.module,de.undercouch.bson4jackson,de.undercouch.bson4jac
+ kson.types",de.undercouch.bson4jackson.types;version="2.7.0"
+Bundle-Vendor: Michel Kraemer
+Bundle-Version: 2.7.0
+Tool: Bnd-2.4.0.201411031534
+Bundle-Name: bson4jackson
+Bnd-LastModified: 1453787325271
+Created-By: 1.7.0_04 (Oracle Corporation)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: de.undercouch.bson4jackson
+Import-Package: com.fasterxml.jackson.core;version="[2.7,3)",com.faste
+ rxml.jackson.core.base;version="[2.7,3)",com.fasterxml.jackson.core.i
+ o;version="[2.7,3)",com.fasterxml.jackson.core.json;version="[2.7,3)"
+ ,com.fasterxml.jackson.core.type;version="[2.7,3)",com.fasterxml.jack
+ son.databind;version="[2.7,3)",com.fasterxml.jackson.databind.deser;v
+ ersion="[2.7,3)",com.fasterxml.jackson.databind.module;version="[2.7,
+ 3)",com.fasterxml.jackson.databind.ser;version="[2.7,3)"
+

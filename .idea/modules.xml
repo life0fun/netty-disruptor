@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/netty-disruptor.iml" filepath="$PROJECT_DIR$/.idea/modules/netty-disruptor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/netty-disruptor_main.iml" filepath="$PROJECT_DIR$/.idea/modules/netty-disruptor_main.iml" group="netty-disruptor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/netty-disruptor_test.iml" filepath="$PROJECT_DIR$/.idea/modules/netty-disruptor_test.iml" group="netty-disruptor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/netty-disruptor_unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/netty-disruptor_unitTest.iml" group="netty-disruptor" />
+    </modules>
+  </component>
+</project>

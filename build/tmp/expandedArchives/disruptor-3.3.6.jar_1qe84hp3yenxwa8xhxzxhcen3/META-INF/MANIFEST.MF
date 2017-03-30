@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-Description: Disruptor - Concurrent Programming Framework
+Bundle-SymbolicName: com.lmax.disruptor
+Built-By: barkerm
+Bundle-ManifestVersion: 2
+Bnd-LastModified: 1475527608000
+Bundle-DocURL: http://lmax-exchange.github.com/disruptor
+Bundle-Vendor: LMAX Disruptor Development Team
+Import-Package: sun.misc
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Tool: Bnd-2.4.0.201411031534
+Export-Package: com.lmax.disruptor;version="3.3.6";uses:="com.lmax.dis
+ ruptor.dsl",com.lmax.disruptor.collections;version="3.3.6",com.lmax.d
+ isruptor.dsl;version="3.3.6";uses:="com.lmax.disruptor",com.lmax.disr
+ uptor.util;version="3.3.6";uses:="com.lmax.disruptor,sun.misc"
+Bundle-Name: Disruptor Framework
+Bundle-Version: 3.3.6
+Created-By: 1.8.0_51 (Oracle Corporation)
+

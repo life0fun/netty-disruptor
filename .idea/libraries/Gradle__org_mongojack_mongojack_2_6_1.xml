@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mongojack:mongojack:2.6.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongojack/mongojack/2.6.1/67af3a000ca0afebdf1ebb57e2f444c119654665/mongojack-2.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongojack/mongojack/2.6.1/af3d52d3bae5ea37cec2dfaf4734adce5cc4c393/mongojack-2.6.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

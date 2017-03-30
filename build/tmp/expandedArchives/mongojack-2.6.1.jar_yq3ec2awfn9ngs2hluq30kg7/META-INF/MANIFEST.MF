@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1464393948707
+Build-Jdk: 1.8.0_91
+Built-By: bmccann
+Bundle-Description: Maps MongoDB objects to POJOs using Jackson
+Bundle-DocURL: http://www.devbliss.com
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: MongoJack
+Bundle-SymbolicName: org.mongojack
+Bundle-Vendor: devbliss GmbH
+Bundle-Version: 2.6.1
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.mongojack;version="2.6.1";uses:="com.fasterxml.jacks
+ on.databind,com.mongodb"
+Import-Package: com.fasterxml.jackson.annotation;version="[2.7,3)",com.f
+ asterxml.jackson.core;version="[2.7,3)",com.fasterxml.jackson.core.base
+ ;version="[2.7,3)",com.fasterxml.jackson.core.io;version="[2.7,3)",com.
+ fasterxml.jackson.core.util;version="[2.7,3)",com.fasterxml.jackson.dat
+ abind;version="[2.7,3)",com.fasterxml.jackson.databind.deser;version="[
+ 2.7,3)",com.fasterxml.jackson.databind.deser.std;version="[2.7,3)",com.
+ fasterxml.jackson.databind.introspect;version="[2.7,3)",com.fasterxml.j
+ ackson.databind.module;version="[2.7,3)",com.fasterxml.jackson.databind
+ .ser;version="[2.7,3)",com.fasterxml.jackson.databind.ser.std;version="
+ [2.7,3)",com.fasterxml.jackson.databind.type;version="[2.7,3)",com.fast
+ erxml.jackson.databind.util;version="[2.7,3)",com.mongodb,de.undercouch
+ .bson4jackson;version="[2.7,3)",de.undercouch.bson4jackson.types;versio
+ n="[2.7,3)",javax.persistence,org.bson,org.bson.io,org.bson.types
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Tool: Bnd-2.4.1.201501161923

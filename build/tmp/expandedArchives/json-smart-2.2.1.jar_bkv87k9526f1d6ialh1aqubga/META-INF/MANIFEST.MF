@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1446984851864
+Build-Jdk: 1.7.0_80
+Built-By: uriel
+Bundle-Description: JSON (JavaScript Object Notation) is a lightweight d
+ ata-interchange format. It is easy for humans to read and write. It is 
+ easy for machines to parse and generate. It is based on a subset of the
+  JavaScript Programming Language, Standard ECMA-262 3rd Edition - Decem
+ ber 1999. JSON is a text format that is completely language independent
+  but uses conventions that are familiar to programmers of the C-family 
+ of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and
+  many others. These properties make JSON an ideal data-interchange lang
+ uage.
+Bundle-DocURL: http://www.minidev.net/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: json-smart
+Bundle-SymbolicName: net.minidev.json-smart
+Bundle-Vendor: Chemouni Uriel
+Bundle-Version: 2.2.1
+Created-By: Apache Maven Bundle Plugin
+Export-Package: net.minidev.json;uses:="net.minidev.asm,net.minidev.json
+ .parser,net.minidev.json.reader,net.minidev.json.writer";version="2.2.1
+ ",net.minidev.json.annotate;version="2.2.1",net.minidev.json.parser;use
+ s:="net.minidev.json.writer";version="2.2.1",net.minidev.json.reader;us
+ es:="net.minidev.json";version="2.2.1",net.minidev.json.writer;uses:="n
+ et.minidev.json,net.minidev.json.parser";version="2.2.1"
+Import-Package: net.minidev.asm;version="[1.1,2)",net.minidev.json,net.m
+ inidev.json.annotate,net.minidev.json.parser,net.minidev.json.reader,ne
+ t.minidev.json.writer
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.6))"
+Tool: Bnd-3.0.0.201509101326

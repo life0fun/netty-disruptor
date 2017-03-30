@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1482858981979
+Build-Jdk: 1.7.0_79
+Built-By: tony
+Bundle-Description: Sonatype helps open source projects to set up Maven 
+ repositories on https://oss.sonatype.org/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.html
+Bundle-ManifestVersion: 2
+Bundle-Name: swagger-annotations
+Bundle-SymbolicName: io.swagger.annotations
+Bundle-Version: 1.5.12
+Created-By: Apache Maven Bundle Plugin
+Export-Package: io.swagger.annotations;version="1.5.12.SNAPSHOT"
+implementation-version: 1.5.12
+mode: development
+package: io.swagger
+Tool: Bnd-1.50.0
+url: https://github.com/swagger-api/swagger-core/modules/swagger-annotat
+ ions

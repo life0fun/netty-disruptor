@@ -1,0 +1,254 @@
+apply plugin:'application'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'org.owasp.dependencycheck'
+apply plugin: 'eu.appsatori.fatjar'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://repository.jboss.org/nexus/content/groups/public/"}
+        maven { url "http://central.maven.org/maven2/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
+        classpath "gradle.plugin.org.owasp:dependency-check-gradle:1.4.5.1"
+    }
+
+    ext {
+        major                       = 0
+        minor                       = 1
+        MODULE                      = "LOG"
+    }
+}
+
+sourceCompatibility = 1.8
+version = '1.0.0'
+// gradlw build && gradlew run can execute Main directly.
+mainClassName = "com.logicmonitor.research.logserver.server.Main"
+
+repositories {
+  mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+        }
+    }
+    test {
+        java{
+            srcDir 'test/unit'
+            srcDir 'test/component'
+            srcDir 'test/util'
+        }
+    }
+    unitTest {
+        java {
+            srcDir 'test/unit'
+            srcDir 'test/util'
+        }
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
+    }
+}
+
+// Definition rule which resource should be include.
+processResources {
+    from ('src')
+    exclude ('**/*.java')
+}
+
+configurations {
+    compress
+}
+
+dependencies {
+  compile 'com.google.guava:guava:18.0',
+          'com.github.rholder:guava-retrying:2.0.0',
+          'io.netty:netty-all:4.0.23.Final',
+          'io.netty:netty:3.10.6.Final',
+          'org.apache.kafka:kafka_2.11:0.9.0.1',
+          "org.apache.kafka:kafka-clients:0.9.0.1",
+          "joda-time:joda-time:2.2",
+          'com.google.protobuf:protobuf-java:2.6.1',
+          'org.slf4j:slf4j-api:1.7.12',
+          'javax.annotation:javax.annotation-api:1.2-b01',
+          'org.mongodb:mongodb-driver:3.4.2',
+          'org.mongojack:mongojack:2.6.1',
+          'com.squareup.okhttp3:okhttp:3.6.0',
+          'io.dropwizard.metrics:metrics-core:3.2.0',
+          'org.glassfish.jersey.core:jersey-common:2.25.1',
+          'org.glassfish.jersey.core:jersey-server:2.25.1',
+          'com.lmax:disruptor:3.3.6',
+          'commons-codec:commons-codec:1.10',
+          'io.swagger:swagger-annotations:1.5.12',
+          'org.apache.logging.log4j:log4j-api:2.8',
+          'org.apache.logging.log4j:log4j-core:2.8',
+          'org.apache.logging.log4j:log4j-slf4j-impl:2.8',
+          'org.mindrot:jbcrypt:0.3m',
+          'com.jayway.jsonpath:json-path:2.2.0',
+          'com.github.zafarkhaja:java-semver:0.9.0',
+          'javax.validation:validation-api:1.1.0.Final',
+          'com.google.inject:guice:4.1.0',
+          'com.google.inject.extensions:guice-assistedinject:4.1.0',
+          'com.google.inject.extensions:guice-multibindings:4.1.0',
+          'org.slf4j:slf4j-api:1.7.24'
+
+  compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.0'
+  compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+  compile group: 'com.eaio.uuid', name: 'uuid', version: '3.2'
+
+    testCompile 'junit:junit:4.12'
+}
+
+// Definition source which should include.
+// a debug task to print jars
+task printCompileJars << {
+    configurations.compile.each {
+        println it
+    }
+}
+
+// Define manifest
+ext.sharedManifest = manifest {
+    attributes(
+        'Modlue': "${MODULE}",
+        'Implementation-Title': "${project.name}",
+        'Built-Date': new Date().getDateTimeString(),
+        'Built-With': "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
+        'Created-By': 'Java ' + System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')'
+    )
+}
+
+//--------------------------------- Specific Tasks ---------------------------------
+ext {
+    archiveDestDir        = 'build/resources/main/com/santaba/server/deploy/supportfiles/'
+    resourcesDir          = 'resources'
+    resourcesTemp         = 'build/resources_temp'
+    archiveSantabaName    = 'santaba'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2' //version required
+}
+
+
+//Add compile parameter to check if there is deprecated methods used
+compileJava {
+    options.compilerArgs.add("-XDignore.symbol.file")
+    options.compilerArgs.add("-Werror")
+    options.fork = true
+    options.forkOptions.executable = 'javac'
+    options.deprecation = true
+}
+
+//Override war task addition attributes
+//war {
+//    manifest = project.manifest {
+//        from sharedManifest
+//    }
+//
+//    from(resourcesTemp) {
+//    }
+//
+//    webInf {
+//        from 'WEB-INF'
+//        include '*'
+//        include '**/*'
+//    }
+//
+//    metaInf { from 'META-INF/context.xml' }
+//    archivesBaseName = archiveSantabaName
+//}
+
+jar {
+    archivesBaseName = "cloud-logger"
+}
+
+//compress js script uiv2
+task compress << {
+    delete (resourcesTemp)
+    copy{
+        from(resourcesDir)
+        into(resourcesTemp)
+    }
+
+    if(project.hasProperty("z") ){
+        println "Compressed"
+    }else{
+        println "Uncompressed"
+    }
+}
+
+task unitTest(type: Test, dependsOn: compileJava) {
+    testClassesDir = sourceSets.unitTest.output.classesDir
+    classpath = sourceSets.unitTest.runtimeClasspath
+}
+
+//--------------------------------- Design build command --------------------------------
+task preBuild {}
+task preRelease {}
+task afterTest {}
+task afterRelease {}
+task beforeTest {}
+
+preBuild.mustRunAfter clean
+preRelease.mustRunAfter clean
+test.mustRunAfter preBuild, preRelease
+unitTest.mustRunAfter preBuild, preRelease
+afterTest.mustRunAfter test, unitTest
+compress.mustRunAfter preBuild, afterTest
+war.mustRunAfter compress
+afterRelease.mustRunAfter war
+
+
+defaultTasks 'clean','preBuild','test','afterTest','compress', 'war'
+
+
+//task build (overwrite: true ) {
+//    dependsOn = ['clean','preBuild','test','afterTest','compress', 'war']
+//}
+
+task release {
+    if(project.hasProperty("lat") && lat == "true") {
+        dependsOn = ['clean','preRelease','test','afterTest','compress', 'war','afterRelease']
+    }else {
+        dependsOn = ['clean','preRelease','unitTest','afterTest','compress', 'war','afterRelease']
+    }
+}
+
+test.dependsOn('beforeTest')
+test {
+    ignoreFailures = false
+    maxParallelForks = 1
+
+    // set heap size for the test JVM(s)
+    minHeapSize = "512m"
+    maxHeapSize = "5120m"
+
+    // set JVM arguments for the test JVM(s)
+    jvmArgs '-XX:MaxPermSize=2560m'
+
+    // listen to events in the test execution lifecycle
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+}
+
+// no need to run fatJar, ./gradlew run will execute.
+fatJar {}
+
+// you need to run ./gradlew fatjar and ./gradlew runFinalJar.
+task runFinalJar(type: JavaExec) {
+    classpath = files('build/libs/cloud-logger-1.0.0.jar')
+    classpath += sourceSets.main.runtimeClasspath
+    main = "com.logicmonitor.research.logserver.server.Main"
+}
